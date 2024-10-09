@@ -6,6 +6,8 @@ const Navbar = () => {
       <h1>Journal App</h1>
       <div className="links">
         <Link to="/">Home</Link>
+
+        <Link to="/class-overview">Class Overview</Link>
         <Link
           to="/create"
           style={
