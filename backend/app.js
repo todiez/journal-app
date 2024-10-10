@@ -15,13 +15,13 @@ const app = express();
 
 app.use(cors()); // This allows requests from all origins, or you can configure it for specific origins
 
-
 app.use(express.json());
 //necessary to access the request objects of the routes; looks if there is any
 //body to the request coming in, if yes it is parsing and attaching it to the request object
+app.use(express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
-  console.log(req.path, req.method);
+  //console.log(req.path, req.method);
   next();
 });
 

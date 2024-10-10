@@ -3,6 +3,7 @@ import Navbar from "./components/Nav";
 import Home from "./pages/Home";
 import NotFound from "./components/NotFound";
 import ClassOverview from "./pages/ClassOverview";
+import ClassDetail from "./components/ClassDetail";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />}></Route>
             <Route path="/class-overview" element={<ClassOverview />}></Route>
+            <Route path="/classes/:id" element={<ClassDetail />}></Route>
             <Route path="/*" element={<NotFound />}></Route>
           </Routes>
         </div>

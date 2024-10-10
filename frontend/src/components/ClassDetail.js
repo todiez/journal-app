@@ -1,10 +1,18 @@
 const ClassDetail = () => {
+ 
+  const { data: schoolClasses } = fetch("http://localhost:4000/api/classes");
+
   return (
     <div>
-      <h3>Klasse 8a</h3>
-      <p>Klassenlehrer: Herr Wyrtki</p>
-      <p>32 Schüler</p>
-      <p>08:00 Uhr - 09:00 : Gas, Wasser, Scheisse in Theorie & Praxis</p>
+      <h2>Class Detail Component</h2>
+
+      {/* {schoolClasses.map((schoolClass) => (
+        <div className="blog-preview" key={schoolClasses._id}>
+          <h3>
+            {counter}. {schoolClass.className}
+          </h3>
+        </div>
+      ))} */}
     </div>
   );
 };
