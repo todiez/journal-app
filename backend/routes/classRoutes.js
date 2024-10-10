@@ -18,6 +18,30 @@ router.get("/", async (req, res) => {
   res.status(200).json(schoolClasses);
 });
 
+//get a SINGLE classes
+router.get("/:id", async (req, res) => {
+  //all route parameters are stored on params property
+  const { id } = req.params;
+ 
+
+  //check if ID is valid
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    //if not, just return with status 400
+    return res.status(404).json({ error: "Class ID not found!" });
+  }
+
+  //using Blog Model/Schema
+  const schoolClasses = await schoolClass.findById(id);
+  
+
+  if (!schoolClasses) {
+    //res back to client (browser)
+    return res.status(404).json({ error: "Class not found!" });
+  }
+  //res to client (browser): sending back ok as well as all blogs in json format
+  res.status(200).json(schoolClasses);
+});
+
 //post a NEW class, fire 2nd argument reference to blogController
 router.post("/", async (req, res) => {
   //grab all properties from the request body, available due to the

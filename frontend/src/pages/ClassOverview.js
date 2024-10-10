@@ -1,53 +1,38 @@
-import ClassDetail from "../components/ClassDetail";
-import ClassList from "../components/ClassList";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const ClassOverview = () => {
-  //const { data: schoolClasses } = fetch("http://localhost:4000/api/classes");
+  const [data, setData] = useState(null);
+  const [isPending, setIsPending] = useState(true);
+  const url = "http://localhost:4000/api/classes";
 
-  const schoolClasses = [
-    {
-      className: "10A",
-      classTeacher: "Mrs. Smith",
-      studentCount: 30,
-      timetable: "Monday to Friday, 8:00 AM - 3:00 PM",
-    },
-    {
-      className: "9B",
-      classTeacher: "Mr. Johnson",
-      studentCount: 28,
-      timetable: "Monday to Friday, 8:30 AM - 3:30 PM",
-    },
-    {
-      className: "11C",
-      classTeacher: "Ms. Garcia",
-      studentCount: 25,
-      timetable:
-        "Monday, Wednesday, Friday: 9:00 AM - 4:00 PM; Tuesday, Thursday: 8:00 AM - 2:00 PM",
-    },
-    {
-      className: "8D",
-      classTeacher: "Mr. Lee",
-      studentCount: 32,
-      timetable:
-        "Monday to Thursday, 7:45 AM - 2:45 PM; Friday: 7:45 AM - 1:00 PM",
-    },
-    {
-      className: "7E",
-      classTeacher: "Dr. Patel",
-      studentCount: 29,
-      timetable:
-        "Daily, 9:00 AM - 4:00 PM with a break from 12:00 PM - 1:00 PM",
-    },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        setIsPending(false);
+        setData(data);
+      } catch {
+        console.log("Fetch did not work");
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div>
-      {schoolClasses && (
-        <ClassList
-          schoolClasses={schoolClasses}
-          pageTitle="All Classes from ClassList Component"
-        />
-      )}
+      <h2>Class Overview Component</h2>
+      {isPending && <div>Loading...</div>}
+      {data &&
+        data.map((schoolClass) => (
+          <div className="blog-preview" key={schoolClass._id}>
+            <Link to={`/${schoolClass._id}`}>
+              <h3>{schoolClass.className}</h3>
+            </Link>
+          </div>
+        ))}
     </div>
   );
 };
