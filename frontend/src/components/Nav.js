@@ -15,7 +15,7 @@ const Navbar = () => {
             {
               //Inner curly braces: JS Object
               color: "white",
-              backgroundColor: "blue",
+              backgroundColor: "orangered",
               borderRadius: "18px",
             }
           }

@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const schoolClass = require("../models/classMongooseSchema");
+const noteObj = require("../models/noteMongooseSchema");
 
 //create an instance of express router
 const router = express.Router();
@@ -22,7 +23,6 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   //all route parameters are stored on params property
   const { id } = req.params;
- 
 
   //check if ID is valid
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -32,7 +32,6 @@ router.get("/:id", async (req, res) => {
 
   //using Blog Model/Schema
   const schoolClasses = await schoolClass.findById(id);
-  
 
   if (!schoolClasses) {
     //res back to client (browser)
@@ -45,7 +44,7 @@ router.get("/:id", async (req, res) => {
 //post a NEW class, fire 2nd argument reference to blogController
 router.post("/", async (req, res) => {
   //grab all properties from the request body, available due to the
-  //middle ware in servjer.js app.use((express.json))
+  //middle ware in app.js app.use((express.json))
   const { className, classTeacher, studentCount, timetable } = req.body;
   console.log(req.body);
   console.log(className);
@@ -61,6 +60,26 @@ router.post("/", async (req, res) => {
       timetable,
     });
     res.status(200).json(schoolClasses);
+  } catch (error) {
+    //error object has a message property on it
+    res.status(400).json({ error: error.message });
+  }
+});
+
+//Add a NEW note
+router.post("/note", async (req, res) => {
+  //grab all properties from the request body, available due to the
+  //middle ware in app.js app.use((express.json))
+  const { classID, note } = req.body;
+  console.log(classID);
+
+  //try to create a new Note document inside the Class collection
+  try {
+    const noteObjs = await noteObj.create({
+      classID,
+      note,
+    });
+    res.status(200).json(noteObjs);
   } catch (error) {
     //error object has a message property on it
     res.status(400).json({ error: error.message });
