@@ -7,10 +7,9 @@ const ClassDetail = () => {
   const { id } = useParams();
   const url = process.env.REACT_APP_BACKEND_API;
 
-  // const [data, setData] = useState(null);
   const [note, setNote] = useState("");
-  // const [isPending, setIsPending] = useState(true);
 
+  //useFetch custom hook
   const { data, isPending } = useFetch(url + id);
 
   const handleSubmit = async (e) => {

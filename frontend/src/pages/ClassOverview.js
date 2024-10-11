@@ -1,25 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import useFetch from "../hooks/useFetch";
 
 const ClassOverview = () => {
-  const [data, setData] = useState(null);
-  const [isPending, setIsPending] = useState(true);
-  const url = "http://localhost:4000/api/classes";
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        setIsPending(false);
-        setData(data);
-      } catch {
-        console.log("Fetch did not work");
-      }
-    };
-
-    fetchData();
-  }, []);
+  const { data, isPending } = useFetch(process.env.REACT_APP_BACKEND_API);
 
   return (
     <div>
