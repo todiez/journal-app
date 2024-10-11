@@ -1,8 +1,4 @@
-import ClassList from "../components/ClassList";
-
 const Home = () => {
-  
-
   return (
     <div className="home">
       <h2>Home Component</h2>

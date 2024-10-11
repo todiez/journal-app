@@ -1,30 +1,17 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import useFetch from "../hooks/useFetch";
 
 const ClassDetail = () => {
   // Extracting id from URL parameters:
   const { id } = useParams();
+  const url = process.env.REACT_APP_BACKEND_API;
 
-  const [data, setData] = useState(null);
+  // const [data, setData] = useState(null);
   const [note, setNote] = useState("");
-  const [isPending, setIsPending] = useState(true);
+  // const [isPending, setIsPending] = useState(true);
 
-  const url = "http://localhost:4000/api/classes/";
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(url + id);
-        const data = await response.json();
-        setIsPending(false);
-        setData(data);
-      } catch {
-        console.log("Fetch did not work");
-      }
-    };
-
-    fetchData();
-  }, [id]);
+  const { data, isPending } = useFetch(url + id);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
