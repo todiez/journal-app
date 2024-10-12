@@ -1,0 +1,14 @@
+{
+    "className": "10A",
+    "classTeacher": "Mr.Wyrtki",
+    "studentCount": "24",
+    "timetable": {
+        "Block 1": "Gas",
+        "Block 2": "Wasser",
+        "Block 3": "Scheisse",
+    },
+    "notes": {
+        "note 1": "Der Lehrer ist öferts abwesend",
+        "note 2": "Der Lehrer riecht nach Abwesehnheit wie Matterne",
+    },
+}

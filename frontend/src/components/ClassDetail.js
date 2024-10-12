@@ -34,14 +34,12 @@ const ClassDetail = () => {
       const json = await response.json();
       console.log("Success:", json);
 
-      // Here you might want to do something with the response data,
-      // like update the UI or redirect the user
+      
     } catch (error) {
       console.error(
         "There was a problem with the fetch operation:",
         error.message
       );
-      // Handle the error appropriately in your application
     }
   };
 

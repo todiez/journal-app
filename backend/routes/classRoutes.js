@@ -86,4 +86,14 @@ router.post("/note", async (req, res) => {
   }
 });
 
+//get ALL notes
+router.get("/", async (req, res) => {
+  //using Note Model/Schema
+  const collection = noteObj.collection("All Notes")
+  const notes = await collection.find({});
+
+  //res to client (browser): sending back ok as well as all notes in json format
+  res.status(200).json(notes);
+});
+
 module.exports = router;
